@@ -33,8 +33,13 @@ For the graphical interface of this function, please visit sharkPulse for the [v
 
 - Process image
 ```r
-result_image <- process_image("image.jpg")
+result_image = process_image("whiteshark.jpg")
 print(result_image)
+
+                 species detection_probability species_probability
+1 Carcharodon carcharias             0.9816648           0.8698095
+        img_name
+1 whiteshark.jpg
 ```
 
 - Plot performance metrics
