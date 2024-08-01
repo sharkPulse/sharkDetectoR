@@ -8,7 +8,9 @@ The Shark Detector is an AI application for detecting and taxonomically classify
 
 We rely on crowdsourcing efforts to increase AI performance, so if you have footage of sharks that you want to contribute, please reach to the contacts below!
 
-<img src="man/figures/figure1.png" alt="How does it work?" width="300"/>
+<p align="center">
+  <img src="man/figures/figure1.png" alt="pipeline" width="500"/>
+</p>
 
 ## Installation
 
@@ -29,7 +31,9 @@ print(result)
 
 For the graphical interface of this function, please visit sharkPulse for the [video processor](http://sharkpulse.org/video-processor).
 
-<img src="man/figures/figure5.pdf" alt="How does it work?" width="300"/>
+<p align="center">
+  <img src="man/figures/figure5.PNG" alt="processor" width="500"/>
+</p>
 
 - Process image
 ```r
