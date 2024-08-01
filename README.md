@@ -13,7 +13,7 @@ We rely on crowdsourcing efforts to increase AI performance, so if you have foot
 You can install the package directly from GitHub using the `devtools` package:
 
 ```r
-devtools::install_github("JeremyFJ/sharkDetectorR")
+devtools::install_github("sharkPulse/sharkDetectorR")
 ```
 
 ## Usage
