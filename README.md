@@ -8,7 +8,7 @@ sharkPulse is an advanced cyber infrastructure designed to crowdsource global si
 
 We rely on crowdsourcing efforts to increase AI performance, so if you have footage of sharks that you want to contribute, please reach to the contacts below!
 
-![How does it work?](man/figures/figure1.png)
+<a href="https://github.com/sharkPulse/Shark-Detector"><img src="man/figures/figure1.png" align="center" height="300" /></a>
 
 ## Installation
 
