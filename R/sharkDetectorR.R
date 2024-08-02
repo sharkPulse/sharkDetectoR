@@ -84,6 +84,7 @@ process_video <- function(video_path, download_images = FALSE, crop = FALSE) {
 #' @return A data frame with shark species and their performance metrics.
 #' @export
 list_sharks <- function() {
+  library(dplyr)
   # Read the CSV file
   url <- 'https://sp2.cs.vt.edu/shiny/sharkdetector/combined_report.csv'
   performance_data <- read.csv(url)
@@ -141,10 +142,6 @@ process_image <- function(image_path) {
   return(results_df)
 }
 
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
 #' Plot Performance Metrics for Genus and Species Classification
 #'
 #' This function reads the CSV file containing classification performance metrics
@@ -155,6 +152,8 @@ library(tidyr)
 #' @param genus A character string indicating the genus to plot ("all" or a specific genus).
 #' @export
 performance <- function(genus = "all") {
+  library(ggplot2)
+  library(dplyr)
   # Read the CSV file
   url <- 'https://sp2.cs.vt.edu/shiny/sharkdetector/combined_report.csv'
   performance_data <- read.csv(url)
@@ -190,4 +189,36 @@ performance <- function(genus = "all") {
   performance_plot <- plot_metrics(performance_long)
   
   print(performance_plot)
+}
+
+#' Process a Directory of Images for Shark Detection and Classification
+#'
+#' Processes all images in a specified directory using the Flask API for shark detection and classification.
+#' The API returns detected shark species, detection probabilities, and classified species probabilities for each image.
+#' The results are saved to a CSV file.
+#'
+#' @param directory_path The path to the directory containing the image files to be processed.
+#' @examples
+#' \dontrun{
+#'   process_directory("path/to/images")
+#' }
+#' @export
+process_directory <- function(directory_path = "./images") {
+  # Get the list of all image files in the directory
+  image_files <- list.files(directory_path, pattern = "\\.(jpg|jpeg|png)$", full.names = TRUE, ignore.case = TRUE)
+  
+  # Initialize an empty data frame to store results
+  all_results <- data.frame()
+  
+  # Loop through each image file and process it
+  for (image_file in image_files) {
+    cat("Processing:", basename(image_file), "\n")
+    result_df <- process_image(image_file)
+    all_results <- dplyr::bind_rows(all_results, result_df)
+  }
+  
+  # Write the combined results to a CSV file
+  write.csv(all_results, "./results.csv", row.names = FALSE)
+  cat("Results saved to:", "results.csv", "\n")
+  return(all_results) 
 }

@@ -42,6 +42,16 @@ print(result_image)
 1 whiteshark.jpg
 ```
 
+- Process a batch of images
+```r
+> results = process_directory("./images/")
+Processing: carcharhinus.jpg 
+Processing: hammerhead.jpg 
+Processing: whiteshark.jpg 
+Processing: whiteshark2.jpg 
+Results saved to: results.csv
+```
+
 - Plot performance metrics
 ```r
 performance()  # For all genera

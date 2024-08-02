@@ -2,5 +2,6 @@
 
 export(list_sharks)
 export(performance)
+export(process_directory)
 export(process_image)
 export(process_video)
