@@ -4,10 +4,14 @@
 \alias{process_image}
 \title{Process an Image for Shark Detection and Classification}
 \usage{
-process_image(image_path)
+process_image(image_path, download_images = FALSE, threshold = 0.95)
 }
 \arguments{
 \item{image_path}{The path to the image file to be processed.}
+
+\item{download_images}{Logical, whether to download the processed images. Default is FALSE.}
+
+\item{threshold}{decimal from 0-1 to indicate the threshold value that the object detection program should discriminate shark subjects.}
 }
 \value{
 A list with the detected species, detection probability, species probability, and image path.
@@ -20,7 +24,7 @@ Optionally, the function can download the processed image.
 }
 \examples{
 \dontrun{
-  result <- process_image("path/to/image.jpg", download_image = FALSE, crop = FALSE)
+  result <- process_image("path/to/image.jpg", download_image = FALSE, threshold = 0.95)
   print(result)
 }
 }

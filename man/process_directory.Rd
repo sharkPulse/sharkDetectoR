@@ -4,10 +4,18 @@
 \alias{process_directory}
 \title{Process a Directory of Images for Shark Detection and Classification}
 \usage{
-process_directory(directory_path = "./images")
+process_directory(
+  directory_path = "./images",
+  download_images = FALSE,
+  threshold = 0.95
+)
 }
 \arguments{
 \item{directory_path}{The path to the directory containing the image files to be processed.}
+
+\item{download_images}{Logical, whether to download the processed images. Default is FALSE.}
+
+\item{threshold}{decimal from 0-1 to indicate the threshold value that the object detection program should discriminate shark subjects.}
 }
 \description{
 Processes all images in a specified directory using the Flask API for shark detection and classification.
@@ -16,6 +24,6 @@ The results are saved to a CSV file.
 }
 \examples{
 \dontrun{
-  process_directory("path/to/images")
+  process_directory("path/to/images, download_images = FALSE, threshold = 0.95")
 }
 }

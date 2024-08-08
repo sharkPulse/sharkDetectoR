@@ -4,14 +4,14 @@
 \alias{process_video}
 \title{Process a Video for Shark Detection and Classification}
 \usage{
-process_video(video_path, download_images = FALSE, crop = FALSE)
+process_video(video_path, download_images = FALSE, threshold = 0.95)
 }
 \arguments{
 \item{video_path}{The path to the video file to be processed.}
 
 \item{download_images}{Logical, whether to download the processed images. Default is FALSE.}
 
-\item{crop}{Logical, whether to download cropped detected sharks instead of the entire frame.}
+\item{threshold}{decimal from 0-1 to indicate the threshold value that the object detection program should discriminate shark subjects.}
 }
 \value{
 A data frame with the detected species, timestamps, detection probabilities, species probabilities, and image paths.
@@ -23,7 +23,7 @@ classified species probabilities along with cropped images.
 }
 \examples{
 \dontrun{
-  result <- process_video("path/to/video.mp4", download_images = TRUE)
+  result <- process_video("path/to/video.mp4", download_images = TRUE, threshold = 0.95)
   print(result)
 }
 }

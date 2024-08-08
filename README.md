@@ -17,13 +17,20 @@ devtools::install_github("sharkPulse/sharkDetectorR")
 ```
 
 ## Usage
-- Process video
-```r
-library(sharkDetectorR)
+To use `sharkDetectorR`, process a video, an image, or a batch of images with these functions. Additionally, generate the most up-to-date performance reports and print the current list of classifiable shark genera and species and their corresponding accuracy. Media can be processed to return shark detections, bounding box coordinates, species classifications, prediction probability, and the name of the cropped and original (parent) image. Multiple detection boxes can be drawn per image.
 
-result <- process_video("video.mp4", download = FALSE, crop = FALSE)
-print(result)
+- Process a video
+```r
+result <- process_video("video.mp4", download = TRUE, threshold = 0.95)
+colnames(result)
+ [1] "species"               "timestamp"             "ymin"                 
+ [4] "xmin"                  "ymax"                  "xmax"                 
+ [7] "detection_probability" "species_probability"   "img_name"             
+[10] "parent_image"
 ```
+
+
+
 
 For the graphical interface of this function, please visit sharkPulse for the [video processor](http://sharkpulse.org/video-processor).
 
@@ -31,25 +38,24 @@ For the graphical interface of this function, please visit sharkPulse for the [v
   <img src="man/figures/figure5.PNG" alt="processor" width="700"/>
 </p>
 
-- Process image
+- Process an image 
 ```r
-result_image = process_image("whiteshark.jpg")
-print(result_image)
-
-                 species detection_probability species_probability
-1 Carcharodon carcharias             0.9816648           0.8698095
-        img_name
-1 whiteshark.jpg
+result_image = process_image("whiteshark.jpg", download_images = TRUE, threshold = 0.95)
+colnames(result_image)
+ [1] "species"               "timestamp"             "ymin"                 
+ [4] "xmin"                  "ymax"                  "xmax"                 
+ [7] "detection_probability" "species_probability"   "img_name"             
+[10] "parent_image"
 ```
 
 - Process a batch of images
 ```r
-> results = process_directory("./images/")
+> results = process_directory("./images/", download_images = TRUE, threshold = 0.95)
 Processing: carcharhinus.jpg 
 Processing: hammerhead.jpg 
 Processing: whiteshark.jpg 
 Processing: whiteshark2.jpg 
-Results saved to: results.csv
+Results saved to: detected_images/images.csv
 ```
 
 - Plot performance metrics
