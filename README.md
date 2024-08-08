@@ -21,7 +21,7 @@ To use `sharkDetectorR`, process a video, an image, or a batch of images with th
 
 - Process a video
 ```r
-result <- process_video("video.mp4", download = TRUE, threshold = 0.95)
+result <- process_video("video.mp4", download_images = TRUE, threshold = 0.95)
 colnames(result)
  [1] "species"               "timestamp"             "ymin"                 
  [4] "xmin"                  "ymax"                  "xmax"                 
