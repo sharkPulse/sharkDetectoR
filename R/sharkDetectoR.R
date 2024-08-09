@@ -1,5 +1,5 @@
-#' @name sharkDetectorR-package
-#' @aliases sharkDetectorR
+#' @name sharkDetectoR-package
+#' @aliases sharkDetectoR
 #' @docType package
 #' @title Shark Detection and Classification Package
 #' @description Provides functions to submit videos and images to a Flask API for shark detection and classification.
@@ -156,7 +156,7 @@ list_sharks <- function() {
 #' @return A list with the detected species, detection probability, species probability, and image path.
 #' @examples
 #' \dontrun{
-#'   result <- process_image("path/to/image.jpg", download_image = FALSE, threshold = 0.95)
+#'   result <- process_image("path/to/image.jpg", download_images = FALSE, threshold = 0.95)
 #'   print(result)
 #' }
 #' @export

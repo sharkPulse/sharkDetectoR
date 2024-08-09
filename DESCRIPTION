@@ -1,4 +1,4 @@
-Package: sharkDetectorR
+Package: sharkDetectoR
 Type: Package
 Title: Shark Detection and Classification from Videos and Images
 Version: 0.1.0
