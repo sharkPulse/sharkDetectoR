@@ -29,9 +29,6 @@ colnames(result)
 [10] "parent_image"
 ```
 
-
-
-
 For the graphical interface of this function, please visit sharkPulse for the [video processor](http://sharkpulse.org/video-processor).
 
 <p align="left">
@@ -56,6 +53,43 @@ Processing: hammerhead.jpg
 Processing: whiteshark.jpg 
 Processing: whiteshark2.jpg 
 Results saved to: detected_images/images.csv
+```
+
+## `iucn_list` Function
+
+The `iucn_list` function allows you to query the IUCN and Aquamaps API endpoints to retrieve species presence information for a given geographical location and radius. This function is particularly useful for conservation and ecological research, as it combines data from two sources to identify species occurrences and their likelihood within a specified area.
+
+### Function Parameters
+
+- `lon`: Numeric. The longitude of the target location.
+- `lat`: Numeric. The latitude of the target location.
+- `radius_km`: Numeric. The radius (in kilometers) around the specified location within which to search for species occurrences. Defaults to 60 km.
+
+### Return Value
+
+The function returns a data frame containing the following columns:
+
+- **`species`**: The scientific name of each species present within the specified radius.
+- **`aquamaps2020_prob`**: The average probability of occurrence from Aquamaps data within the specified radius. If no data is available, this value will be `NA`.
+- **`category`**: The IUCN Red List conservation category for each species (e.g., `VU` for Vulnerable, `LC` for Least Concern).
+- **`class`**: Classification as `shark` or `ray`.
+- **`condition`**: Species presence condition, indicating if the species is known to be `Extant` (confirmed) or `Possibly Extant` in the specified area.
+
+### Example
+
+Here’s an example of how to use the `iucn_list` function:
+
+```r
+# Sample usage
+result <- iucn_list(lon = -70.0, lat = 43.0, radius_km = 60)
+head(result[1:5])
+                  species aquamaps2020_prob category class condition
+1   Alopias superciliosus                NA       VU shark    Extant
+2        Alopias vulpinus              0.65       VU shark    Extant
+3       Amblyraja jenseni              0.06       LC   ray    Extant
+4       Amblyraja radiata              0.86       VU   ray    Extant
+5    Bathyraja spinicauda              0.73       NT   ray    Extant
+6 Carcharhinus longimanus              0.01       CR shark    Extant
 ```
 
 - Plot performance metrics

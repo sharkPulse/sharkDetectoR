@@ -49,13 +49,13 @@ iucn_list <- function(lat, lon, radius_km = 60) {
   # Remove duplicated columns (if any)
   data <- data[ , !duplicated(names(data))]
 
-  # Sort the data frame alphabetically by 'species'
-  data <- data %>% arrange(species)
-
   # Move the 'species' column to the first position and sort alphabetically
   if ("species" %in% colnames(data)) {
     data <- data[order(data$species), c("species", setdiff(names(data), "species"))]
   }
+
+  # Remove row names by setting them to NULL
+  row.names(data) <- NULL
 
   return(data)
 }
