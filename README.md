@@ -57,7 +57,7 @@ Results saved to: detected_images/images.csv
 
 ## `iucn_list` Function
 
-The `iucn_list` function allows you to query the IUCN and Aquamaps API endpoints to retrieve species presence information for a given geographical location and radius. This function is particularly useful for conservation and ecological research, as it combines data from two sources to identify species occurrences and their likelihood within a specified area.
+The `iucn_list` function allows you to query the IUCN and Aquamaps species distribution for any given geographical location and radius. By scanning potential survey locations for assessment-driven species distributions, this function systematically informs data-boosting efforts.
 
 ### Function Parameters
 
