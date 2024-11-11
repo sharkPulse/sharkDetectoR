@@ -7,28 +7,30 @@
 #' @keywords package
 NULL
 
-#' Find species at a given coordinate with a specified radius
+#' Find species within a specified bounding box
 #'
 #' This function sends a request to the Flask API, which forwards it to the Plumber API,
-#' to retrieve species data at the specified location and radius.
+#' to retrieve species data within the specified bounding box.
 #'
-#' @param lon Numeric, the longitude of the location.
-#' @param lat Numeric, the latitude of the location.
-#' @param radius_km Numeric, the radius in kilometers (default is 60).
-#' @return A data frame of species present at the location with conditions and probabilities.
+#' @param xmin Numeric, minimum longitude of the bounding box.
+#' @param ymin Numeric, minimum latitude of the bounding box.
+#' @param xmax Numeric, maximum longitude of the bounding box.
+#' @param ymax Numeric, maximum latitude of the bounding box.
+#' @return A data frame of species present within the bounding box with conditions and probabilities.
 #' @examples
-#' iucn_list(43, -70)
+#' result = iucn_list(-70, 40, -69, 41)
 #' 
 #' @export
-iucn_list <- function(lat, lon, radius_km = 60) {
+iucn_list <- function(xmin, ymin, xmax, ymax) {
   # Construct the URL for the Flask API endpoint
   api_url <- "http://sp2.cs.vt.edu:5000/find_species"
   
   # Define query parameters
   params <- list(
-    lon = lon,
-    lat = lat,
-    radius_km = radius_km
+    xmin = xmin,
+    ymin = ymin,
+    xmax = xmax,
+    ymax = ymax
   )
   
   # Submit the GET request

@@ -2,25 +2,27 @@
 % Please edit documentation in R/distribution.R
 \name{iucn_list}
 \alias{iucn_list}
-\title{Find species at a given coordinate with a specified radius}
+\title{Find species within a specified bounding box}
 \usage{
-iucn_list(lat, lon, radius_km = 60)
+iucn_list(xmin, ymin, xmax, ymax)
 }
 \arguments{
-\item{lat}{Numeric, the latitude of the location.}
+\item{xmin}{Numeric, minimum longitude of the bounding box.}
 
-\item{lon}{Numeric, the longitude of the location.}
+\item{ymin}{Numeric, minimum latitude of the bounding box.}
 
-\item{radius_km}{Numeric, the radius in kilometers (default is 60).}
+\item{xmax}{Numeric, maximum longitude of the bounding box.}
+
+\item{ymax}{Numeric, maximum latitude of the bounding box.}
 }
 \value{
-A data frame of species present at the location with conditions and probabilities.
+A data frame of species present within the bounding box with conditions and probabilities.
 }
 \description{
 This function sends a request to the Flask API, which forwards it to the Plumber API,
-to retrieve species data at the specified location and radius.
+to retrieve species data within the specified bounding box.
 }
 \examples{
-iucn_list(43, -70)
+result = iucn_list(-70, 40, -69, 41)
 
 }

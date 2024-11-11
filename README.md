@@ -57,13 +57,14 @@ Results saved to: detected_images/images.csv
 
 ## `iucn_list` Function
 
-The `iucn_list` function allows you to query the IUCN and Aquamaps species distribution for any given geographical location and radius. By scanning potential survey locations for assessment-driven species distributions, this function systematically informs data-boosting efforts.
+The `iucn_list` function allows you to query the IUCN and Aquamaps species distribution for any given geographical polygon. By scanning potential survey locations for assessment-driven species distributions, this function systematically informs biodiversity expectations and AI data-boosting efforts.
 
 ### Function Parameters
 
-- `lon`: Numeric. The longitude of the target location.
-- `lat`: Numeric. The latitude of the target location.
-- `radius_km`: Numeric. The radius (in kilometers) around the specified location within which to search for species occurrences. Defaults to 60 km.
+- `xmin` Numeric, minimum longitude of the bounding box.
+- `ymin` Numeric, minimum latitude of the bounding box.
+- `xmax` Numeric, maximum longitude of the bounding box.
+- `ymax` Numeric, maximum latitude of the bounding box.
 
 ### Return Value
 
@@ -74,6 +75,8 @@ The function returns a data frame containing the following columns:
 - **`category`**: The IUCN Red List conservation category for each species (e.g., `VU` for Vulnerable, `LC` for Least Concern).
 - **`class`**: Classification as `shark` or `ray`.
 - **`condition`**: Species presence condition, indicating if the species is known to be `Extant` (confirmed) or `Possibly Extant` in the specified area.
+- **`DepthRangeComShallow`** Fishbase *common* depth classification (shallow)
+- **`DepthRangeComDeep`** Fishbase *common* depth classification (deep)
 
 ### Example
 
@@ -81,15 +84,22 @@ Here’s an example of how to use the `iucn_list` function:
 
 ```r
 # Sample usage
-result <- iucn_list(lon = -70.0, lat = 43.0, radius_km = 60)
+result <- iucn_list(xmin = -70, ymin = 40, xmax = -69, ymax = 41)
 head(result[1:5])
-                  species aquamaps2020_prob category class condition
-1   Alopias superciliosus                NA       VU shark    Extant
-2        Alopias vulpinus              0.65       VU shark    Extant
-3       Amblyraja jenseni              0.06       LC   ray    Extant
-4       Amblyraja radiata              0.86       VU   ray    Extant
-5    Bathyraja spinicauda              0.73       NT   ray    Extant
-6 Carcharhinus longimanus              0.01       CR shark    Extant
+species                 DepthRangeComDeep DepthRangeComShallow    
+1  Alopias superciliosus               730                    0
+2       Alopias vulpinus               650                    0
+3      Amblyraja jenseni              3000                  165
+4      Amblyraja radiata              1540                    5
+5       Apristurus manis              1900                  600
+6 Apristurus melanoasper              1520                  512
+  aquamaps2020_prob             bbox category class       condition
+1              0.14 -70, 40, -69, 41       VU shark Possibly Extant
+2              0.84 -70, 40, -69, 41       VU shark          Extant
+3              0.72 -70, 40, -69, 41       LC   ray          Extant
+4              0.89 -70, 40, -69, 41       VU   ray          Extant
+5                NA -70, 40, -69, 41       LC shark          Extant
+6              0.15 -70, 40, -69, 41       LC shark          Extant
 ```
 
 - Plot performance metrics
@@ -104,7 +114,7 @@ shark_metrics <- list_sharks()
 print(shark_metrics)
 ```
 
-The Shark Detector has the most diverse dataset of shark species in the world, describing over 300 species and 69 classifiable species. To see a summary of the full training dataset, see the [Taxonomy Table](https://sp2.cs.vt.edu/dynamic/queryTax1.php). As we continue to crowdsource global observations, the performance and taxonomic range of the Shark Detector will increase!
+The Shark Detector has the most diverse dataset of shark species in the world, describing over 300 species and 67 classifiable species. To see a summary of the full training dataset, see the [Taxonomy Table](https://sp2.cs.vt.edu/dynamic/queryTax1.php). As we continue to crowdsource global observations, the performance and taxonomic range of the Shark Detector will increase!
 
 ## Contact
 Author: Jeremy F. Jenrette
