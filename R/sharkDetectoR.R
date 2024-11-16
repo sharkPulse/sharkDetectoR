@@ -136,7 +136,29 @@ list_sharks <- function() {
   species_data <- performance_data %>%
     select(Species = X, Precision = precision, Recall = recall, `F1 Score` = f1.score)
   
-  return(species_data)
+  single_spec = c("Galeocerdo cuvier", "Rhincodon typus", "Triaenodon obesus", "Carcharias taurus",
+                  "Carcharodon carcharias", "Prionace glauca")
+
+  # Create a lookup table from the single_spec list
+  single_spec_df <- data.frame(
+    Genus = sub(" .*", "", single_spec),  # Extract the genus name
+    FullName = single_spec               # Full species name
+  )
+
+  # Amend the pipeline
+  sd_species_clean <- species_data %>%
+    # Replace underscores with spaces
+    mutate(Species = ifelse(grepl("_", Species),
+                            gsub("_", " ", Species),  # Replace underscores with spaces
+                            Species)) %>%
+    # Join with single_spec_df to complete species names for genera without underscores
+    left_join(single_spec_df, by = c("Species" = "Genus")) %>%
+    # Replace Species with FullName where applicable
+    mutate(Species = ifelse(!is.na(FullName), FullName, Species)) %>%
+    # Drop the FullName column
+    select(-FullName)
+
+  return(sd_species_clean)
 }
 
 # Example usage
