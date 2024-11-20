@@ -1,4 +1,4 @@
-# sharkDetectoR <a href="http://seaql.org/wp-content/uploads/2022/06/SD.pdf"><img src="man/figures/sd.png" align="right" height="132" /></a>
+# sharkDetectoR <a href="http://seaql.org/wp-content/uploads/2022/06/SD.pdf"><img src="man/figures/sharkDetectoR.png" align="right" height="132" /></a>
 
 This R package provides functions for shark detection and classification from videos and images. It includes functions to submit videos and images to a Flask API for processing, and to visualize performance metrics. For increased customization, retraining, and faster processing speeds, please see the [Shark Detector version repository](https://github.com/sharkPulse/Shark-Detector). Version 4.0.0 can classify 69 species of sharks with an average accuracy of 82%.  
 
