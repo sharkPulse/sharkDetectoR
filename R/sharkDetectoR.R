@@ -137,7 +137,7 @@ list_sharks <- function() {
     select(Species = X, Precision = precision, Recall = recall, `F1 Score` = f1.score)
   
   single_spec = c("Galeocerdo cuvier", "Rhincodon typus", "Triaenodon obesus", "Carcharias taurus",
-                  "Carcharodon carcharias", "Prionace glauca")
+                  "Carcharodon carcharias", "Prionace glauca", "Cetorhinus maximus")
 
   # Create a lookup table from the single_spec list
   single_spec_df <- data.frame(
