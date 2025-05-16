@@ -134,7 +134,7 @@ list_sharks <- function() {
   
   # Identify species
   species_data <- performance_data %>%
-    select(Species = X, Precision = precision, Recall = recall, `F1 Score` = f1.score)
+    dplyr::select(Species = X, Precision = precision, Recall = recall, `F1 Score` = f1.score)
   
   single_spec = c("Galeocerdo cuvier", "Rhincodon typus", "Triaenodon obesus", "Carcharias taurus",
                   "Carcharodon carcharias", "Prionace glauca", "Cetorhinus maximus")
