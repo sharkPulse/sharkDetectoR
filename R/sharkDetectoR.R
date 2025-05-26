@@ -156,7 +156,7 @@ list_sharks <- function() {
     # Replace Species with FullName where applicable
     mutate(Species = ifelse(!is.na(FullName), FullName, Species)) %>%
     # Drop the FullName column
-    select(-FullName)
+    dplyr::select(-FullName)
 
   return(sd_species_clean)
 }
@@ -279,7 +279,7 @@ performance <- function(genus = "all") {
   
   # Reshape data for plotting
   performance_long <- performance_data %>%
-    select(X, precision, recall, f1.score) %>%
+    dplyr::select(X, precision, recall, f1.score) %>%
     tidyr::pivot_longer(cols = c(precision, recall, f1.score), names_to = "Metric", values_to = "Value")
   
   # Plot precision, recall, and f1.score
