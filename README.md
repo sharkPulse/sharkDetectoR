@@ -18,10 +18,6 @@ devtools::install_github("sharkPulse/sharkDetectoR")
 
 ## Configuration
 
-By default, all API calls go to:
-
-http://sharkpulse.cnre.vt.edu
-
 To use `sharkDetectoR`, process an image or a batch of images with these functions. Additionally, generate the most up-to-date performance reports and print the current list of classifiable shark genera and species and their corresponding accuracy. Media can be processed to return shark detections, bounding box coordinates, species classifications, prediction probability, and the name of the cropped and original (parent) image. Multiple detection boxes can be drawn per image.
 
 ## Functions
