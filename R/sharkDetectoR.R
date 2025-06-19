@@ -589,6 +589,29 @@ classify_image <- function(image_path, topk = 1) {
   }
 }
 
+#' Fetch the entire taxonomy3 table from the API
+#'
+#' @return A data.frame with all rows/columns from taxonomy3.
+#' @export
+get_taxonomy <- function() {
+  library(httr)
+  library(jsonlite)
+  base_url = "http://sharkpulse.cnre.vt.edu"
+  url <- paste0(base_url, "/taxonomy3")
+  resp <- GET(url)
+
+  # throw an error if we didn’t get 200
+  stop_for_status(resp)
+
+  # parse JSON into a list of named lists
+  parsed <- content(resp, as = "text", encoding = "UTF-8")
+  dat_list <- fromJSON(parsed, simplifyDataFrame = TRUE)
+
+  # ensure it’s a data.frame
+  df <- as.data.frame(dat_list, stringsAsFactors = FALSE)
+  return(df)
+}
+
 
 #' Retrieve classification performance metrics (order/family/genus/species)
 #'
