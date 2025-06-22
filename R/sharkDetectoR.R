@@ -666,7 +666,7 @@ get_taxonomy <- function() {
 #' }
 #' @export
 get_metrics <- function() {
-  url <- "http://sharkpulse.cnre.vt.edu/static/flat_metrics.csv"
+  url <- "http://sharkpulse.cnre.vt.edu/static/cond_metrics.csv"
   tryCatch({
     df <- utils::read.csv(url, stringsAsFactors = FALSE)
     return(df)
