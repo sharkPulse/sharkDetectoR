@@ -173,6 +173,9 @@ detect_image <- function(image_path,
   return(result_df)
 }
 
+
+
+
 #' Submit a single image for combined detection + hierarchical classification (client-side)
 #'
 #' Calls the Flask API endpoint `/detect_and_classify` at \code{http://sharkpulse.cnre.vt.edu}.
@@ -442,6 +445,42 @@ detect_and_classify <- function(image_path,
 }
 
 
+#’ Score a single image for shark presence
+#’
+#’ @param image_path Path to the image file to classify.
+#’ @param url        URL of your binary‐classifier endpoint (defaults to local `/classify_binary`).
+#’ @return A one‐row tibble with columns `img_name` and `shark_confidence`.
+#’ @export
+is_shark <- function(image_path,
+                              url = "http://sharkpulse.cnre.vt.edu/classify_binary") {
+  if (!file.exists(image_path)) {
+    stop("File not found: ", image_path)
+  }
+
+  res <- tryCatch(
+    httr::POST(
+      url    = url,
+      encode = "multipart",
+      body   = list(image = httr::upload_file(image_path))
+    ),
+    error = function(e) {
+      stop("HTTP error during POST: ", conditionMessage(e))
+    }
+  )
+
+  httr::stop_for_status(res)
+
+  out <- httr::content(res, as = "parsed", simplifyVector = TRUE)
+  if (!is.null(out$error)) {
+    stop("Server returned an error: ", out$error)
+  }
+
+  # return a tibble
+  tibble::tibble(
+    img_name         = out$img_name,
+    shark_confidence = out$shark_confidence
+  )
+}
 
 
 #' Submit a single image for classification (hierarchical taxonomy)
