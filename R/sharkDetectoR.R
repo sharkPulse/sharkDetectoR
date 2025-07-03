@@ -647,7 +647,8 @@ get_taxonomy <- function() {
   dat_list <- fromJSON(parsed, simplifyDataFrame = TRUE)
 
   # ensure it’s a data.frame
-  df <- as.data.frame(dat_list, stringsAsFactors = FALSE)
+  df <- as.data.frame(dat_list, stringsAsFactors = FALSE) 
+  df <- df[,!(colnames(df) %in% c("order_name.x", "order_name.y"))]
   return(df)
 }
 
