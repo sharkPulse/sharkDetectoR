@@ -54,7 +54,8 @@ is_shark(
 ```
 
 Returns a data.frame with columns:
-- 
+- img_path
+- shark_confidence
 
 
 ### Classify species

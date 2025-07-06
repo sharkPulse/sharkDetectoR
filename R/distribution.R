@@ -83,7 +83,7 @@ find_species <- function(xmin, ymin, xmax, ymax) {
       species             <- if (!is.null(x$species)) x$species else NA_character_
       iucn_condition      <- if (!is.null(x$iucn_condition)) x$iucn_condition else NA_character_
       aquamaps2020_prob   <- if (!is.null(x$aquamaps2020_prob)) x$aquamaps2020_prob else NA_real_
-      class_label         <- if (!is.null(x$class)) x$class else NA_character_
+      class_label         <- if (!is.null(x$class)) x$class else NA_character_ # currently returns all shark
       category            <- if (!is.null(x$category)) x$category else NA_character_
       shallow             <- if (!is.null(x$DepthRangeComShallow)) x$DepthRangeComShallow else NA_real_
       deep                <- if (!is.null(x$DepthRangeComDeep)) x$DepthRangeComDeep else NA_real_

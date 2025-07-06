@@ -445,40 +445,67 @@ detect_and_classify <- function(image_path,
 }
 
 
-#’ Score a single image for shark presence
-#’
-#’ @param image_path Path to the image file to classify.
-#’ @return A one‐row tibble with columns `img_name` and `shark_confidence`.
-#’ @export
+#' Score a single image for shark presence (binary classification)
+#'
+#' Calls the Flask API endpoint `/classify_binary` at \code{http://sharkpulse.cnre.vt.edu}.
+#' Returns a single-row data frame with columns `image_path` and `shark_confidence`,
+#' where `shark_confidence` is a probability score [0,1] indicating shark presence.
+#'
+#' @param image_path Path to a local image file (JPEG/PNG).
+#' @return A single-row data.frame with columns:
+#'   \itemize{
+#'     \item \code{image_path} – input image path.
+#'     \item \code{shark_confidence} – predicted probability of shark presence.
+#'   }
+#' @examples
+#' \dontrun{
+#'   df <- is_shark("shark.jpg")
+#'   print(df)
+#' }
+#' @export
 is_shark <- function(image_path) {
+  # 1. Input checks
   if (!file.exists(image_path)) {
-    stop("File not found: ", image_path)
+    stop("`image_path` does not exist: ", image_path)
   }
 
-  res <- tryCatch(
+  # 2. POST to /classify_binary endpoint
+  res <- tryCatch({
     httr::POST(
-      url    = "http://sharkpulse.cnre.vt.edu/classify_binary",
+      url = "http://sharkpulse.cnre.vt.edu/classify_binary",
       encode = "multipart",
-      body   = list(image = httr::upload_file(image_path))
-    ),
-    error = function(e) {
-      stop("HTTP error during POST: ", conditionMessage(e))
-    }
-  )
+      body = list(
+        image = httr::upload_file(image_path)
+      )
+    )
+  }, error = function(e) {
+    stop("HTTP error during POST: ", conditionMessage(e))
+  })
 
-  httr::stop_for_status(res)
-
-  out <- httr::content(res, as = "parsed", simplifyVector = TRUE)
-  if (!is.null(out$error)) {
-    stop("Server returned an error: ", out$error)
+  if (httr::status_code(res) >= 400) {
+    stop(
+      "Server returned HTTP ", httr::status_code(res),
+      "\nMessage: ", httr::content(res, "text", encoding = "UTF-8")
+    )
   }
 
-  # return a tibble
-  tibble::tibble(
-    img_name         = out$img_name,
-    shark_confidence = out$shark_confidence
+  # 3. Parse JSON response
+  json_resp <- httr::content(res, as = "parsed", simplifyVector = TRUE)
+
+  if (!"shark_confidence" %in% names(json_resp)) {
+    stop("Unexpected JSON structure: missing `shark_confidence` field.")
+  }
+
+  # 4. Build a single-row data.frame
+  df <- data.frame(
+    image_path       = normalizePath(image_path),
+    shark_confidence = json_resp$shark_confidence,
+    stringsAsFactors = FALSE
   )
+
+  return(df)
 }
+
 
 
 #' Submit a single image for classification (hierarchical taxonomy)
