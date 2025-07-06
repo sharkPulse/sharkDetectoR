@@ -43,7 +43,7 @@ Returns a data.frame with columns:
 
 
 <p align="left">
-  <img src="man/figures/figure1.png" alt="processor" width="700"/>
+  <img src="man/figures/figure2.png" alt="processor" width="700"/>
 </p>
 
 ### Classify an image
