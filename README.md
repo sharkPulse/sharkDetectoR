@@ -1,4 +1,4 @@
-# sharkDetectoR <img src="man/figures/sharkDetectoR.png" align="right" height="150" />
+# sharkDetectoR <img src="man/figures/sharkDetectoR.png" align="right" width="150" />
 
 This R package provides functions for shark detection and classification from images. It includes functions to submit images to a Flask API for processing, and to visualize performance metrics. The Shark Detector can classify 80 species of sharks with an average accuracy of 88%.  
 
