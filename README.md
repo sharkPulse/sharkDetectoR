@@ -1,4 +1,4 @@
-# sharkDetectoR <a href="http://seaql.org/wp-content/uploads/2022/06/SD.pdf"><img src="man/figures/sharkDetectoR.png" align="right" height="175" /></a>
+# sharkDetectoR <img src="man/figures/sharkDetectoR.png" align="right" height="175" />
 
 This R package provides functions for shark detection and classification from images. It includes functions to submit images to a Flask API for processing, and to visualize performance metrics. The Shark Detector can classify 80 species of sharks with an average accuracy of 88%.  
 
