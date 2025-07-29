@@ -680,8 +680,8 @@ get_taxonomy <- function() {
 
 #' Retrieve classification performance metrics (order/family/genus/species)
 #'
-#' Reads the `flat_metrics.csv` file hosted at
-#' \url{http://sharkpulse.cnre.vt.edu/static/flat_metrics.csv} into a data frame.
+#' Reads the `cond_metrics` (conditional shark classifier metrics) file hosted at
+#' \url{http://sharkpulse.cnre.vt.edu/static/cond_metrics.csv} into a data frame.
 #' Columns are: \code{level, class, precision, recall, f1score, n_train, n_val, n_test}.
 #'
 #' @return A data.frame with one row per taxon at each level.
