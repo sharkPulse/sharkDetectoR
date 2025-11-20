@@ -145,5 +145,3 @@ species                 DepthRangeComDeep DepthRangeComShallow
 The Shark Detector has the most diverse dataset of shark species in the world, describing over 300 species. To see a summary of the full training dataset, see the [Taxonomy Table](https://sp2.cs.vt.edu/dynamic/queryTax2.php). As we continue to crowdsource global observations, the performance and taxonomic range of the Shark Detector will increase!
 
 ## Contact
-Author: Jeremy F. Jenrette
-- Email: jjeremy1@vt.edu
