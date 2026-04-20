@@ -653,6 +653,27 @@ classify_image <- function(image_path, topk = 1) {
   }
 }
 
+#' Get the top taxonomy prediction for an image
+#'
+#' Wraps \code{classify_image(topk = 1)} and returns a single-row data frame
+#' containing only the four taxonomic ranks (order, family, genus, species) of
+#' the highest-confidence prediction.
+#'
+#' @param image_path Path to a local image file (JPEG/PNG).
+#' @return A single-row data frame with columns:
+#'   \code{order, family, genus, species}.
+#' @examples
+#' \dontrun{
+#'   tax <- top_taxonomy("shark.jpg")
+#'   print(tax)
+#' }
+#' @export
+top_taxonomy <- function(image_path) {
+  result <- classify_image(image_path, topk = 1)
+  result[1, c("order", "family", "genus", "species")]
+}
+
+
 #' Fetch the entire taxonomy3 table from the API
 #'
 #' @return A data.frame with all rows/columns from taxonomy3.
